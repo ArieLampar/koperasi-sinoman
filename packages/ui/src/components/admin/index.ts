@@ -1,0 +1,13 @@
+// Admin-specific components for administrative dashboard
+export * from './admin-button'
+export * from './admin-card'
+export * from './admin-form'
+export * from './admin-table'
+export * from './admin-layout'
+export * from './admin-sidebar'
+export * from './admin-header'
+export * from './metric-card'
+export * from './status-indicator'
+export * from './data-table'
+export * from './loading-screen'
+export * from './access-denied'

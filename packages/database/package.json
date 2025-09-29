@@ -1,0 +1,136 @@
+{
+  "name": "@koperasi-sinoman/database",
+  "version": "0.1.0",
+  "description": "Shared database utilities, types, and migration tools for Koperasi Sinoman Supabase database",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.mjs",
+      "require": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client/index.mjs",
+      "require": "./dist/client/index.js",
+      "types": "./dist/client/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.mjs",
+      "require": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
+    "./schemas": {
+      "import": "./dist/schemas/index.mjs",
+      "require": "./dist/schemas/index.js",
+      "types": "./dist/schemas/index.d.ts"
+    },
+    "./migrations": {
+      "import": "./dist/migrations/index.mjs",
+      "require": "./dist/migrations/index.js",
+      "types": "./dist/migrations/index.d.ts"
+    }
+  },
+  "bin": {
+    "db-migrate": "./dist/cli/migrate.js",
+    "db-types": "./dist/cli/generate-types.js",
+    "db-seed": "./dist/cli/seed.js"
+  },
+  "files": [
+    "dist/**",
+    "migrations/**",
+    "seeds/**",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rimraf dist",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "db:generate-types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > src/types/database.ts",
+    "db:migrate": "node dist/cli/migrate.js",
+    "db:migrate:new": "node dist/cli/migrate.js create",
+    "db:migrate:up": "node dist/cli/migrate.js up",
+    "db:migrate:down": "node dist/cli/migrate.js down",
+    "db:migrate:reset": "node dist/cli/migrate.js reset",
+    "db:seed": "node dist/cli/seed.js",
+    "db:seed:dev": "node dist/cli/seed.js --env development",
+    "db:seed:prod": "node dist/cli/seed.js --env production",
+    "db:backup": "node dist/cli/backup.js",
+    "db:restore": "node dist/cli/restore.js",
+    "db:status": "supabase status",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:diff": "supabase db diff --schema public",
+    "db:push": "supabase db push",
+    "db:pull": "supabase db pull",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "zod": "^3.22.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "inquirer": "^9.2.0",
+    "pg": "^8.11.0",
+    "postgres": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/pg": "^8.10.0",
+    "@types/inquirer": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@vitest/coverage-v8": "^0.34.0",
+    "eslint": "^8.50.0",
+    "rimraf": "^5.0.5",
+    "supabase": "^1.110.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.0",
+    "vitest": "^0.34.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "database",
+    "supabase",
+    "typescript",
+    "migrations",
+    "utilities",
+    "koperasi",
+    "sinoman",
+    "postgresql",
+    "orm",
+    "query-builder"
+  ],
+  "author": "Koperasi Sinoman",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koperasi-sinoman/koperasi-sinoman.git",
+    "directory": "packages/database"
+  },
+  "homepage": "https://github.com/koperasi-sinoman/koperasi-sinoman/tree/main/packages/database",
+  "bugs": {
+    "url": "https://github.com/koperasi-sinoman/koperasi-sinoman/issues"
+  }
+}

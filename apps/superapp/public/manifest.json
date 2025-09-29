@@ -1,0 +1,130 @@
+{
+  "name": "Koperasi Sinoman SuperApp",
+  "short_name": "KopSinoman",
+  "description": "Platform digital terpadu untuk anggota Koperasi Sinoman",
+  "theme_color": "#0ea5e9",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "lang": "id",
+  "categories": ["finance", "business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/images/screenshot-narrow.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Simpanan",
+      "short_name": "Simpanan",
+      "description": "Kelola simpanan Anda",
+      "url": "/savings",
+      "icons": [
+        {
+          "src": "/icons/shortcut-savings.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Pinjaman",
+      "short_name": "Pinjaman",
+      "description": "Ajukan pinjaman",
+      "url": "/loans",
+      "icons": [
+        {
+          "src": "/icons/shortcut-loans.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Transaksi",
+      "short_name": "Transaksi",
+      "description": "Riwayat transaksi",
+      "url": "/transactions",
+      "icons": [
+        {
+          "src": "/icons/shortcut-transactions.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.koperasi.sinoman",
+      "id": "com.koperasi.sinoman"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/koperasi-sinoman/id1234567890"
+    }
+  ],
+  "prefer_related_applications": false
+}

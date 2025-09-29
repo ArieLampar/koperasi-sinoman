@@ -1,0 +1,41 @@
+{
+  "name": "@koperasi-sinoman/config",
+  "version": "1.0.0",
+  "description": "Shared configuration files and constants for Koperasi Sinoman",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./eslint": "./eslint.config.js",
+    "./tailwind": "./tailwind.config.js",
+    "./tsconfig": "./tsconfig.json"
+  },
+  "files": [
+    "dist/**",
+    "eslint.config.js",
+    "tailwind.config.js",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^3.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0"
+  }
+}

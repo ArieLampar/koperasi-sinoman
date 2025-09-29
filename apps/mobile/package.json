@@ -1,0 +1,28 @@
+{
+  "name": "@koperasi-sinoman/mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mobile application for Koperasi Sinoman",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "dev": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "build": "expo build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "expo": "~49.0.0",
+    "react": "^18.0.0",
+    "react-native": "^0.72.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.72.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,391 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Admin-specific styles */
+@layer components {
+  /* Admin Layout */
+  .admin-layout {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    @apply font-inter antialiased;
+  }
+
+  .admin-sidebar {
+    @apply bg-white border-r border-neutral-200 shadow-sm backdrop-blur-sm;
+    min-height: 100vh;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .admin-sidebar-dark {
+    @apply bg-neutral-900 border-neutral-800;
+  }
+
+  .admin-sidebar-collapsed {
+    @apply w-16;
+  }
+
+  /* Navigation Items */
+  .admin-nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-neutral-700 rounded-lg transition-all duration-200 hover:bg-neutral-100 hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1;
+    position: relative;
+  }
+
+  .admin-nav-item-active {
+    @apply bg-primary-50 text-primary-700 shadow-sm;
+  }
+
+  .admin-nav-item-active::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-1 bg-primary-500 rounded-r;
+  }
+
+  .admin-nav-item-dark {
+    @apply text-neutral-300 hover:bg-neutral-800 hover:text-white;
+  }
+
+  .admin-nav-item-dark-active {
+    @apply bg-primary-900/20 text-primary-400;
+  }
+
+  /* Permission-based visibility */
+  .admin-nav-item-restricted {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Header */
+  .admin-header {
+    @apply bg-white/95 border-b border-neutral-200 shadow-sm backdrop-blur-sm;
+    backdrop-filter: blur(8px);
+  }
+
+  .admin-header-dark {
+    @apply bg-neutral-900/95 border-neutral-800;
+  }
+
+  /* Content Areas */
+  .admin-content {
+    @apply flex-1 flex flex-col overflow-hidden;
+  }
+
+  .admin-main {
+    @apply flex-1 overflow-y-auto bg-neutral-50 admin-scrollbar;
+    scroll-behavior: smooth;
+  }
+
+  .admin-main-dark {
+    @apply bg-neutral-900;
+  }
+
+  /* Cards */
+  .admin-card {
+    @apply bg-white rounded-xl border border-neutral-200 shadow-sm p-6 transition-all duration-200 hover:shadow-md;
+  }
+
+  .admin-card-dark {
+    @apply bg-neutral-800 border-neutral-700;
+  }
+
+  .admin-card-interactive {
+    @apply cursor-pointer hover:shadow-lg hover:border-neutral-300 transform hover:-translate-y-0.5;
+  }
+
+  /* Metric Cards */
+  .metric-card {
+    @apply bg-gradient-to-br from-white to-neutral-50 rounded-xl border border-neutral-200 p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .metric-card-dark {
+    @apply from-neutral-800 to-neutral-900 border-neutral-700;
+  }
+
+  .metric-card-danger {
+    @apply from-red-50 to-red-100 border-red-200;
+  }
+
+  .metric-card-warning {
+    @apply from-yellow-50 to-yellow-100 border-yellow-200;
+  }
+
+  .metric-card-success {
+    @apply from-green-50 to-green-100 border-green-200;
+  }
+
+  /* Status Indicators */
+  .status-indicator {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-success {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+
+  .status-warning {
+    @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+  }
+
+  .status-error {
+    @apply bg-red-100 text-red-800 border-red-200;
+  }
+
+  .status-info {
+    @apply bg-blue-100 text-blue-800 border-blue-200;
+  }
+
+  .status-pending {
+    @apply bg-orange-100 text-orange-800 border-orange-200;
+  }
+
+  /* Role-based styling */
+  .role-super-admin {
+    @apply bg-purple-100 text-purple-800 border-purple-200;
+  }
+
+  .role-admin {
+    @apply bg-blue-100 text-blue-800 border-blue-200;
+  }
+
+  .role-manager {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+
+  .role-operator {
+    @apply bg-neutral-100 text-neutral-800 border-neutral-200;
+  }
+
+  /* Data Tables */
+  .admin-table {
+    @apply w-full text-sm text-left text-neutral-500;
+  }
+
+  .admin-table th {
+    @apply px-6 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider bg-neutral-50 border-b border-neutral-200;
+  }
+
+  .admin-table td {
+    @apply px-6 py-4 whitespace-nowrap border-b border-neutral-200;
+  }
+
+  .admin-table tbody tr {
+    @apply hover:bg-neutral-50 transition-colors duration-150;
+  }
+
+  /* Buttons */
+  .admin-btn {
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .admin-btn-primary {
+    @apply text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .admin-btn-secondary {
+    @apply text-neutral-700 bg-white border-neutral-300 hover:bg-neutral-50 focus:ring-primary-500;
+  }
+
+  .admin-btn-danger {
+    @apply text-white bg-red-600 hover:bg-red-700 focus:ring-red-500;
+  }
+
+  /* Forms */
+  .admin-form-group {
+    @apply space-y-2;
+  }
+
+  .admin-form-label {
+    @apply block text-sm font-medium text-neutral-700;
+  }
+
+  .admin-form-input {
+    @apply mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
+  }
+
+  .admin-form-error {
+    @apply text-sm text-red-600;
+  }
+
+  /* Security Features */
+  .admin-security-badge {
+    @apply inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-800 border border-red-200;
+  }
+
+  .admin-audit-log {
+    @apply text-xs text-neutral-500 font-mono bg-neutral-50 px-2 py-1 rounded;
+  }
+
+  /* Loading States */
+  .admin-skeleton {
+    @apply animate-pulse bg-neutral-200 rounded;
+  }
+
+  .admin-loading-spinner {
+    @apply animate-spin rounded-full border-2 border-neutral-200 border-t-primary-600;
+  }
+
+  /* Responsive Utilities */
+  .admin-hide-mobile {
+    @apply hidden lg:block;
+  }
+
+  .admin-show-mobile {
+    @apply block lg:hidden;
+  }
+
+  /* Scrollbar styling for admin interface */
+  .admin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f9fafb;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-track {
+    @apply bg-neutral-100 rounded-full;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full;
+    transition: background-color 0.2s ease;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-corner {
+    @apply bg-neutral-100;
+  }
+
+  /* Dark mode scrollbar */
+  .dark .admin-scrollbar {
+    scrollbar-color: #4b5563 #1f2937;
+  }
+
+  .dark .admin-scrollbar::-webkit-scrollbar-track {
+    @apply bg-neutral-800;
+  }
+
+  .dark .admin-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-600;
+  }
+
+  .dark .admin-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-500;
+  }
+}
+
+/* Security and Accessibility */
+@layer utilities {
+  /* Hide content from screen readers but keep for security logging */
+  .admin-audit-only {
+    @apply sr-only;
+  }
+
+  /* Prevent text selection for sensitive data */
+  .admin-no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Blur sensitive content */
+  .admin-blur-sensitive {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+  }
+
+  .admin-blur-sensitive:hover {
+    filter: blur(0px);
+  }
+
+  /* Print styles for admin reports */
+  @media print {
+    .admin-no-print {
+      display: none !important;
+    }
+
+    .admin-print-only {
+      display: block !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .admin-card {
+      @apply border-2 border-neutral-900;
+    }
+
+    .admin-nav-item {
+      @apply border border-transparent hover:border-neutral-900;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .admin-layout * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

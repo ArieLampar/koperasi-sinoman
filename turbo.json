@@ -1,0 +1,100 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "remoteCache": {
+    "enabled": true
+  },
+  "globalEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL",
+    "VERCEL_ENV"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "build/**",
+        "out/**"
+      ],
+      "env": [
+        "NEXT_PUBLIC_*",
+        "SUPABASE_URL",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "DATABASE_URL"
+      ]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NEXT_PUBLIC_*",
+        "SUPABASE_URL",
+        "SUPABASE_ANON_KEY",
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "DATABASE_URL"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "env": []
+    },
+    "lint:fix": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "env": []
+    },
+    "test": {
+      "dependsOn": ["^build", "lint"],
+      "outputs": [
+        "coverage/**"
+      ],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*"
+      ]
+    },
+    "test:watch": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*"
+      ]
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "coverage/**"
+      ],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_*"
+      ]
+    },
+    "type-check": {
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "env": []
+    },
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "format": {
+      "outputs": [],
+      "env": []
+    },
+    "format:check": {
+      "outputs": [],
+      "env": []
+    }
+  }
+}

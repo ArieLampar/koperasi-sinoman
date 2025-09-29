@@ -1,0 +1,108 @@
+{
+  "name": "@koperasi-sinoman/superapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SuperApp - Main member-facing application for Koperasi Sinoman",
+  "keywords": ["koperasi", "nextjs", "supabase", "fintech", "cooperative"],
+  "author": "Koperasi Sinoman",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.17.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "clean": "rm -rf .next node_modules/.cache",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "@koperasi-sinoman/ui": "workspace:*",
+    "@koperasi-sinoman/database": "workspace:*",
+    "@koperasi-sinoman/auth": "workspace:*",
+    "@koperasi-sinoman/utils": "workspace:*",
+    "@koperasi-sinoman/types": "workspace:*",
+    "@koperasi-sinoman/config": "workspace:*",
+    "@supabase/supabase-js": "^2.45.0",
+    "@supabase/ssr": "^0.5.0",
+    "@tanstack/react-query": "^5.51.0",
+    "@tanstack/react-query-devtools": "^5.51.0",
+    "react-hook-form": "^7.52.0",
+    "@hookform/resolvers": "^3.9.0",
+    "zod": "^3.23.0",
+    "tailwindcss": "^3.4.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.4.0",
+    "lucide-react": "^0.427.0",
+    "framer-motion": "^11.3.0",
+    "date-fns": "^3.6.0",
+    "react-hot-toast": "^2.4.0",
+    "cmdk": "^1.0.0",
+    "vaul": "^0.9.0",
+    "next-themes": "^0.3.0",
+    "next-pwa": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.3.0",
+    "prettier-plugin-tailwindcss": "^0.6.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "vitest": "^2.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/ui": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/user-event": "^14.5.0",
+    "jsdom": "^24.1.0",
+    "webpack-bundle-analyzer": "^4.10.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "next": ">=14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    },
+    "next": {
+      "optional": false
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

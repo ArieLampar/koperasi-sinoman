@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100 dark:bg-neutral-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400 dark:bg-neutral-500;
+  }
+
+  /* Focus styles */
+  .focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Button base styles */
+  .btn-base {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  /* Card styles */
+  .card-base {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  }
+
+  /* Input base styles */
+  .input-base {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Admin-specific component styles */
+  .admin-card {
+    @apply bg-white rounded-lg border border-neutral-200 shadow-sm p-6;
+  }
+
+  .admin-btn {
+    @apply btn-base px-4 py-2 h-10;
+  }
+
+  .admin-btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .admin-btn-secondary {
+    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .admin-btn-success {
+    @apply bg-success-500 text-white hover:bg-success-600;
+  }
+
+  .admin-btn-warning {
+    @apply bg-warning-500 text-white hover:bg-warning-600;
+  }
+
+  .admin-btn-danger {
+    @apply bg-error-500 text-white hover:bg-error-600;
+  }
+
+  .admin-form-input {
+    @apply input-base;
+  }
+
+  .admin-form-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+
+  .admin-form-group {
+    @apply space-y-2;
+  }
+
+  .admin-table {
+    @apply w-full caption-bottom text-sm;
+  }
+
+  .admin-table th {
+    @apply h-12 px-4 text-left align-middle font-medium text-muted-foreground border-b;
+  }
+
+  .admin-table td {
+    @apply p-4 align-middle border-b;
+  }
+
+  .admin-table tr:hover {
+    @apply bg-muted/50;
+  }
+
+  /* Metric cards */
+  .metric-card {
+    @apply card-base p-6;
+  }
+
+  .metric-card-success {
+    @apply border-success-200 bg-success-50;
+  }
+
+  .metric-card-warning {
+    @apply border-warning-200 bg-warning-50;
+  }
+
+  .metric-card-error {
+    @apply border-error-200 bg-error-50;
+  }
+
+  /* Status indicators */
+  .status-indicator {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+
+  .status-success {
+    @apply bg-success-100 text-success-800 border-success-200;
+  }
+
+  .status-warning {
+    @apply bg-warning-100 text-warning-800 border-warning-200;
+  }
+
+  .status-error {
+    @apply bg-error-100 text-error-800 border-error-200;
+  }
+
+  .status-info {
+    @apply bg-info-100 text-info-800 border-info-200;
+  }
+
+  /* Superapp-specific styles */
+  .superapp-card {
+    @apply bg-white rounded-xl border border-neutral-100 shadow-sm p-4;
+  }
+
+  .superapp-btn {
+    @apply btn-base rounded-xl px-6 py-3 text-base font-semibold;
+  }
+
+  .superapp-btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 shadow-lg shadow-primary-500/25;
+  }
+
+  .superapp-btn-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/25;
+  }
+
+  .superapp-input {
+    @apply input-base rounded-xl border-neutral-200 focus:border-primary-300 focus:ring-primary-200;
+  }
+
+  /* Utility classes */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-in {
+    animation-duration: 150ms;
+    animation-fill-mode: both;
+  }
+
+  .animate-out {
+    animation-duration: 150ms;
+    animation-fill-mode: both;
+  }
+
+  .fade-in {
+    animation-name: fade-in;
+  }
+
+  .fade-out {
+    animation-name: fade-out;
+  }
+
+  .zoom-in {
+    animation-name: zoom-in;
+  }
+
+  .zoom-out {
+    animation-name: zoom-out;
+  }
+
+  .slide-in-from-top {
+    animation-name: slide-in-from-top;
+  }
+
+  .slide-in-from-bottom {
+    animation-name: slide-in-from-bottom;
+  }
+
+  .slide-in-from-left {
+    animation-name: slide-in-from-left;
+  }
+
+  .slide-in-from-right {
+    animation-name: slide-in-from-right;
+  }
+
+  /* Grid utilities */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+  }
+
+  /* Safe area utilities */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+}

@@ -1,16 +1,35 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    // Strict type checking
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    // Module resolution
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noEmit": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    // JSX
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -18,10 +37,54 @@
         "name": "next"
       }
     ],
+
+    // Path mapping for workspace packages
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@koperasi/*": ["packages/*"],
+      "@koperasi/ui": ["packages/ui/src"],
+      "@koperasi/ui/*": ["packages/ui/src/*"],
+      "@koperasi/config": ["packages/config/src"],
+      "@koperasi/config/*": ["packages/config/src/*"],
+      "@koperasi/database": ["packages/database/src"],
+      "@koperasi/database/*": ["packages/database/src/*"],
+      "@koperasi/auth": ["packages/auth/src"],
+      "@koperasi/auth/*": ["packages/auth/src/*"],
+      "@koperasi/utils": ["packages/utils/src"],
+      "@koperasi/utils/*": ["packages/utils/src/*"],
+      "@koperasi/types": ["packages/types/src"],
+      "@koperasi/types/*": ["packages/types/src/*"],
+      "@koperasi/api": ["packages/api/src"],
+      "@koperasi/api/*": ["packages/api/src/*"],
+      "@koperasi/schemas": ["packages/schemas/src"],
+      "@koperasi/schemas/*": ["packages/schemas/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "build",
+    "out",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+  "references": [
+    {
+      "path": "./apps"
+    },
+    {
+      "path": "./packages"
+    }
+  ]
 }

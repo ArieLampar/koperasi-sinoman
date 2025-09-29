@@ -1,0 +1,242 @@
+{
+  "name": "@koperasi-sinoman/utils",
+  "version": "1.0.0",
+  "description": "Comprehensive utility functions and helpers for Koperasi Sinoman applications with Indonesian localization support",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./validation": {
+      "import": "./dist/validation/index.mjs",
+      "require": "./dist/validation/index.js",
+      "types": "./dist/validation/index.d.ts"
+    },
+    "./formatting": {
+      "import": "./dist/formatting/index.mjs",
+      "require": "./dist/formatting/index.js",
+      "types": "./dist/formatting/index.d.ts"
+    },
+    "./currency": {
+      "import": "./dist/currency.mjs",
+      "require": "./dist/currency.js",
+      "types": "./dist/currency.d.ts"
+    },
+    "./date": {
+      "import": "./dist/date/index.mjs",
+      "require": "./dist/date/index.js",
+      "types": "./dist/date/index.d.ts"
+    },
+    "./number": {
+      "import": "./dist/number/index.mjs",
+      "require": "./dist/number/index.js",
+      "types": "./dist/number/index.d.ts"
+    },
+    "./string": {
+      "import": "./dist/string/index.mjs",
+      "require": "./dist/string/index.js",
+      "types": "./dist/string/index.d.ts"
+    },
+    "./array": {
+      "import": "./dist/array/index.mjs",
+      "require": "./dist/array/index.js",
+      "types": "./dist/array/index.d.ts"
+    },
+    "./object": {
+      "import": "./dist/object/index.mjs",
+      "require": "./dist/object/index.js",
+      "types": "./dist/object/index.d.ts"
+    },
+    "./crypto": {
+      "import": "./dist/crypto/index.mjs",
+      "require": "./dist/crypto/index.js",
+      "types": "./dist/crypto/index.d.ts"
+    },
+    "./file": {
+      "import": "./dist/file/index.mjs",
+      "require": "./dist/file/index.js",
+      "types": "./dist/file/index.d.ts"
+    },
+    "./url": {
+      "import": "./dist/url/index.mjs",
+      "require": "./dist/url/index.js",
+      "types": "./dist/url/index.d.ts"
+    },
+    "./error": {
+      "import": "./dist/error/index.mjs",
+      "require": "./dist/error/index.js",
+      "types": "./dist/error/index.d.ts"
+    },
+    "./constants": {
+      "import": "./dist/constants/index.mjs",
+      "require": "./dist/constants/index.js",
+      "types": "./dist/constants/index.d.ts"
+    },
+    "./qr": {
+      "import": "./dist/qr/index.mjs",
+      "require": "./dist/qr/index.js",
+      "types": "./dist/qr/index.d.ts"
+    },
+    "./qr-code": {
+      "import": "./dist/qr-code.mjs",
+      "require": "./dist/qr-code.js",
+      "types": "./dist/qr-code.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "dev": "npm run build:watch",
+    "clean": "rimraf dist",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,json,md}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:watch": "vitest --coverage",
+    "benchmark": "vitest bench",
+    "size-check": "size-limit",
+    "docs:generate": "typedoc src/index.ts --out docs",
+    "prepublishOnly": "npm run clean && npm run type-check && npm run lint && npm run test && npm run build",
+    "postbuild": "npm run size-check",
+    "ci": "npm run type-check && npm run lint && npm run format:check && npm run test:coverage"
+  },
+  "peerDependencies": {
+    "zod": "^3.22.0"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^3.0.0",
+    "libphonenumber-js": "^1.10.51",
+    "nanoid": "^5.0.4",
+    "slug": "^9.0.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.0.1",
+    "@types/node": "^20.10.6",
+    "@types/slug": "^5.0.8",
+    "@types/validator": "^13.11.7",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "@vitest/coverage-v8": "^1.1.3",
+    "@vitest/ui": "^1.1.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "size-limit": "^11.0.1",
+    "tsup": "^8.0.1",
+    "typedoc": "^0.25.7",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.3",
+    "zod": "^3.22.4"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "60 KB"
+    },
+    {
+      "path": "dist/validation/index.js",
+      "limit": "15 KB"
+    },
+    {
+      "path": "dist/formatting/index.js",
+      "limit": "20 KB"
+    },
+    {
+      "path": "dist/currency.js",
+      "limit": "18 KB"
+    },
+    {
+      "path": "dist/date/index.js",
+      "limit": "25 KB"
+    },
+    {
+      "path": "dist/crypto/index.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/qr/index.js",
+      "limit": "12 KB"
+    }
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "utils",
+    "utilities",
+    "helpers",
+    "koperasi",
+    "sinoman",
+    "indonesian",
+    "validation",
+    "formatting",
+    "typescript",
+    "date-manipulation",
+    "crypto",
+    "file-handling",
+    "localization",
+    "business-logic",
+    "financial-calculations",
+    "error-handling",
+    "url-utilities",
+    "string-processing",
+    "array-manipulation",
+    "object-utilities",
+    "qr-code",
+    "qr-generation",
+    "payment-qr",
+    "qris",
+    "indonesian-payment"
+  ],
+  "author": {
+    "name": "Koperasi Sinoman",
+    "email": "dev@koperasi-sinoman.com",
+    "url": "https://koperasi-sinoman.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koperasi-sinoman/koperasi-sinoman.git",
+    "directory": "packages/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/koperasi-sinoman/koperasi-sinoman/issues"
+  },
+  "homepage": "https://github.com/koperasi-sinoman/koperasi-sinoman/tree/main/packages/utils#readme",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "funding": {
+    "type": "sponsorship",
+    "url": "https://github.com/sponsors/koperasi-sinoman"
+  }
+}
