@@ -9,6 +9,46 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- =====================================================
+-- RESET EXISTING SCHEMA (IF ANY)
+-- =====================================================
+-- Drop existing tables to ensure clean migration
+DROP TABLE IF EXISTS shu_allocations CASCADE;
+DROP TABLE IF EXISTS shu_distributions CASCADE;
+DROP TABLE IF EXISTS time_deposits CASCADE;
+DROP TABLE IF EXISTS cart_items CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS shopping_carts CASCADE;
+DROP TABLE IF EXISTS fit_check_ins CASCADE;
+DROP TABLE IF EXISTS fit_leaderboard CASCADE;
+DROP TABLE IF EXISTS fit_participants CASCADE;
+DROP TABLE IF EXISTS fit_challenges CASCADE;
+DROP TABLE IF EXISTS bank_sampah_investments CASCADE;
+DROP TABLE IF EXISTS bank_sampah_member_summary CASCADE;
+DROP TABLE IF EXISTS bank_sampah_units CASCADE;
+DROP TABLE IF EXISTS point_redemptions CASCADE;
+DROP TABLE IF EXISTS point_transactions CASCADE;
+DROP TABLE IF EXISTS point_rules CASCADE;
+DROP TABLE IF EXISTS member_points CASCADE;
+DROP TABLE IF EXISTS transactions CASCADE;
+DROP TABLE IF EXISTS savings_accounts CASCADE;
+DROP TABLE IF EXISTS savings_types CASCADE;
+DROP TABLE IF EXISTS transaction_types CASCADE;
+DROP TABLE IF EXISTS product_variants CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS product_categories CASCADE;
+DROP TABLE IF EXISTS sellers CASCADE;
+DROP TABLE IF EXISTS rewards CASCADE;
+DROP TABLE IF EXISTS referrals CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
+DROP TABLE IF EXISTS notification_templates CASCADE;
+DROP TABLE IF EXISTS member_documents CASCADE;
+DROP TABLE IF EXISTS admin_users CASCADE;
+DROP TABLE IF EXISTS audit_logs CASCADE;
+DROP TABLE IF EXISTS system_settings CASCADE;
+DROP TABLE IF EXISTS members CASCADE;
+
+-- =====================================================
 -- AUTHENTICATION & MEMBERSHIP TABLES
 -- =====================================================
 

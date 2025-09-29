@@ -6,7 +6,13 @@
       "Bash(npm install)",
       "Bash(pnpm install:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(pnpm db:migrate:*)",
+      "Bash(pnpm build:*)",
+      "Bash(npx supabase:*)",
+      "Bash(pnpm --filter @koperasi-sinoman/database db:seed)",
+      "Bash(npx tsup:*)",
+      "Bash(pnpm --filter @koperasi-sinoman/database db:setup-rls)"
     ],
     "deny": [],
     "ask": []
