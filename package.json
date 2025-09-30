@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "turbo dev --concurrency=15",
+    "dev:app": "pnpm --filter @koperasi-sinoman/superapp dev",
     "lint": "turbo lint",
     "test": "turbo test",
     "clean": "turbo clean",

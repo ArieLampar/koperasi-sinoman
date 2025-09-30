@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { CloudinaryService, fileToCloudinaryFile, CloudinaryError } from '@koperasi-sinoman/integrations/cloudinary'
+import { uploadToCloudinary, deleteFromCloudinary } from '@/lib/cloudinary'
 
 // =============================================================================
 // CONFIGURATION
@@ -10,8 +10,6 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
-
-const cloudinary = new CloudinaryService()
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -218,46 +216,44 @@ export async function POST(request: NextRequest) {
     // 5. Validate permissions
     await validateUploadPermissions(user.id, uploadContext.uploadType, uploadContext.productId)
 
-    // 6. Convert file to Cloudinary format
-    const cloudinaryFile = await fileToCloudinaryFile(file)
+    // 6. Convert file to buffer
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
 
     // 7. Upload to Cloudinary
-    const uploadResult = await cloudinary.uploadFromBuffer(
-      cloudinaryFile.buffer!,
+    const uploadResponse = await uploadToCloudinary(
+      buffer,
+      uploadContext.folder,
       {
-        folder: uploadContext.folder,
         tags: uploadContext.tags,
-        useFilename: true,
-        uniqueFilename: true,
-        overwrite: false,
-        context: {
-          userId: user.id,
-          uploadType: uploadContext.uploadType,
-          ...(uploadContext.productId && { productId: uploadContext.productId })
-        }
       }
     )
+
+    if (!uploadResponse.success || !uploadResponse.data) {
+      throw new Error(uploadResponse.error || 'Upload failed')
+    }
+
+    const uploadResult = uploadResponse.data
 
     // 8. Save upload record to database
     const { data: uploadRecord, error: dbError } = await supabase
       .from('file_uploads')
       .insert({
-        id: uploadResult.publicId,
+        id: uploadResult.public_id,
         user_id: user.id,
         upload_type: uploadContext.uploadType,
         product_id: uploadContext.productId,
         file_url: uploadResult.url,
-        public_id: uploadResult.publicId,
-        original_filename: uploadResult.originalFilename,
-        file_size: uploadResult.bytes,
+        public_id: uploadResult.public_id,
+        original_filename: file.name,
+        file_size: file.size,
         file_format: uploadResult.format,
         width: uploadResult.width,
         height: uploadResult.height,
         metadata: {
           folder: uploadContext.folder,
           tags: uploadContext.tags,
-          resourceType: uploadResult.resourceType,
-          signature: uploadResult.signature
+          resource_type: uploadResult.resource_type,
         }
       })
       .select()
@@ -266,7 +262,7 @@ export async function POST(request: NextRequest) {
     if (dbError) {
       // If database save fails, try to clean up Cloudinary upload
       try {
-        await cloudinary.deleteFile(uploadResult.publicId)
+        await deleteFromCloudinary(uploadResult.public_id)
       } catch (cleanupError) {
         console.error('Failed to cleanup Cloudinary file:', cleanupError)
       }
@@ -312,12 +308,7 @@ export async function POST(request: NextRequest) {
     let errorCode = 'INTERNAL_ERROR'
     let errorMessage = 'An unexpected error occurred'
 
-    if (error instanceof CloudinaryError) {
-      statusCode = 400
-      errorCode = 'CLOUDINARY_ERROR'
-      errorMessage = error.message
-    } else {
-      switch (error.message) {
+    switch (error.message) {
         case 'UNAUTHORIZED':
         case 'INVALID_TOKEN':
           statusCode = 401
@@ -358,7 +349,6 @@ export async function POST(request: NextRequest) {
           errorMessage = 'Database operation failed'
           break
       }
-    }
 
     const response: UploadResponse = {
       success: false,
@@ -485,7 +475,7 @@ export async function DELETE(request: NextRequest) {
 
     // 4. Delete from Cloudinary
     try {
-      await cloudinary.deleteFile(upload.public_id)
+      await deleteFromCloudinary(upload.public_id)
     } catch (cloudinaryError) {
       console.error('Cloudinary deletion failed:', cloudinaryError)
       // Continue with database deletion even if Cloudinary fails

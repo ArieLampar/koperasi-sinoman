@@ -35,8 +35,6 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@supabase/supabase-js'],
     // Optimize package imports
     optimizePackageImports: ['lucide-react', 'date-fns'],
-    // Enable concurrent features
-    serverActions: true,
   },
 
   // Image optimization configuration

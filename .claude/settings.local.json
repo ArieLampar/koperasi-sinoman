@@ -25,7 +25,16 @@
       "Bash(fi)",
       "Bash(done)",
       "Bash(for page in toko savings referral investasi bank-sampah membership/profile)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(awk:*)",
+      "Bash(powershell:*)",
+      "Bash(git checkout:*)",
+      "Bash(cat:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []

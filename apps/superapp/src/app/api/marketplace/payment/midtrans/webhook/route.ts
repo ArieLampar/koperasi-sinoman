@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { createMidtransIntegration } from '@koperasi-sinoman/integrations/midtrans'
+import { sendPaymentSuccessMessage } from '@/lib/whatsapp/helpers'
 
 export async function POST(request: NextRequest) {
   try {
@@ -131,14 +132,78 @@ export async function POST(request: NextRequest) {
         created_at: new Date().toISOString()
       })
 
-    // TODO: Send notification to user
-    // This could include email, SMS, or push notification
+    // Send WhatsApp notification to user
     if (newPaymentStatus === 'paid') {
       console.log(`Payment successful for order ${transactionStatus.order_id}`)
-      // Send success notification
+
+      // Get user and order details for notification
+      const { data: member } = await supabase
+        .from('members')
+        .select('full_name, phone')
+        .eq('id', order.user_id)
+        .single()
+
+      const { data: orderDetails } = await supabase
+        .from('marketplace_orders')
+        .select('order_number, total_amount, payment_method')
+        .eq('id', order.id)
+        .single()
+
+      if (member && member.phone && orderDetails) {
+        // Determine order type and conditional content
+        let orderType = 'Pembelian Produk'
+        let conditionalContent = ''
+
+        // Check if this is a Fit Challenge order
+        const { data: fitChallengeItems } = await supabase
+          .from('marketplace_order_items')
+          .select(`
+            product_id,
+            products:product_id (
+              name,
+              category
+            )
+          `)
+          .eq('order_id', order.id)
+
+        const isFitChallenge = fitChallengeItems?.some(
+          item => item.products?.category === 'fit_challenge'
+        )
+
+        if (isFitChallenge) {
+          orderType = 'Pendaftaran Fit Challenge'
+          conditionalContent = `
+📅 *INFORMASI FIT CHALLENGE*
+
+Terima kasih telah mendaftar! Detail jadwal dan lokasi akan dikirimkan melalui email dan WhatsApp H-2 sebelum acara.
+
+Persiapkan diri Anda:
+✅ Membawa botol minum
+✅ Menggunakan pakaian olahraga
+✅ Datang 15 menit lebih awal
+`
+        }
+
+        try {
+          await sendPaymentSuccessMessage(
+            member.phone,
+            member.full_name,
+            orderDetails.order_number,
+            orderType,
+            orderDetails.total_amount,
+            transactionStatus.payment_type || orderDetails.payment_method,
+            conditionalContent,
+            order.user_id
+          )
+          console.log(`Payment success WhatsApp sent to ${member.phone}`)
+        } catch (error) {
+          console.error('Failed to send payment success WhatsApp:', error)
+          // Don't fail the webhook if notification fails
+        }
+      }
     } else if (newPaymentStatus === 'failed') {
       console.log(`Payment failed for order ${transactionStatus.order_id}`)
-      // Send failure notification
+      // Could send failure notification if needed
     }
 
     return NextResponse.json({ status: 'ok' })

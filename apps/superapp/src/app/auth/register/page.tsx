@@ -361,6 +361,21 @@ export default function RegisterPage() {
       }
 
       if (data.user) {
+        // Call post-registration webhook to send welcome WhatsApp message
+        try {
+          await fetch('/api/auth/post-register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              userId: data.user.id,
+              email: formData.email,
+            }),
+          })
+        } catch (webhookError) {
+          console.error('Post-registration webhook failed:', webhookError)
+          // Don't block the flow if webhook fails
+        }
+
         toast.success('Pendaftaran berhasil! Silakan cek email untuk verifikasi.')
         router.push('/auth/verify?email=' + encodeURIComponent(formData.email))
       }
@@ -718,11 +733,11 @@ export default function RegisterPage() {
               onChange={(e) => handleChange('monthly_income', e.target.value)}
             >
               <option value="">Pilih range penghasilan</option>
-              <option value="< 2000000">< Rp 2.000.000</option>
+              <option value="< 2000000">&lt; Rp 2.000.000</option>
               <option value="2000000-5000000">Rp 2.000.000 - Rp 5.000.000</option>
               <option value="5000000-10000000">Rp 5.000.000 - Rp 10.000.000</option>
               <option value="10000000-20000000">Rp 10.000.000 - Rp 20.000.000</option>
-              <option value="> 20000000">> Rp 20.000.000</option>
+              <option value="> 20000000">&gt; Rp 20.000.000</option>
             </select>
           </div>
           {errors.monthly_income && <p className="form-error">{errors.monthly_income}</p>}
