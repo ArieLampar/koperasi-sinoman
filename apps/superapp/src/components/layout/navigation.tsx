@@ -12,16 +12,24 @@ import {
   Menu,
   X,
   Bell,
-  LogOut
+  LogOut,
+  ShoppingBag,
+  Users,
+  TrendingUp,
+  Recycle
 } from 'lucide-react'
 import { useAuth } from '@/components/providers/auth-provider'
 
 const navigation = [
   { name: 'Beranda', href: '/', icon: Home },
+  { name: 'Toko', href: '/toko', icon: ShoppingBag },
   { name: 'Simpanan', href: '/savings', icon: PiggyBank },
-  { name: 'Pinjaman', href: '/loans', icon: CreditCard },
-  { name: 'Transaksi', href: '/transactions', icon: Receipt },
-  { name: 'Profile', href: '/profile', icon: User },
+  // { name: 'Pinjaman', href: '/loans', icon: CreditCard }, // Page not yet implemented
+  { name: 'Referral', href: '/referral', icon: Users },
+  { name: 'Investasi', href: '/investasi', icon: TrendingUp },
+  { name: 'Bank Sampah', href: '/bank-sampah', icon: Recycle },
+  // { name: 'Transaksi', href: '/transactions', icon: Receipt }, // Page not yet implemented
+  { name: 'Profile', href: '/membership/profile', icon: User },
 ]
 
 export default function Navigation() {
@@ -156,21 +164,21 @@ export default function Navigation() {
 
       {/* Bottom Navigation for Mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 z-50">
-        <div className="grid grid-cols-5 h-16">
+        <div className="flex overflow-x-auto scrollbar-hide">
           {navigation.map((item) => {
             const isActive = pathname === item.href
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
+                className={`flex flex-col items-center justify-center space-y-1 px-3 py-2 min-w-[80px] h-16 transition-colors ${
                   isActive
                     ? 'text-primary-600 bg-primary-50'
                     : 'text-neutral-600 hover:text-neutral-900'
                 }`}
               >
-                <item.icon className="h-5 w-5" />
-                <span className="text-xs font-medium">{item.name}</span>
+                <item.icon className="h-5 w-5 flex-shrink-0" />
+                <span className="text-xs font-medium text-center">{item.name}</span>
               </Link>
             )
           })}

@@ -941,6 +941,59 @@ export {
 // const uiConfig = require('@koperasi-sinoman/ui/tailwind')
 
 // -----------------------------------------------------------------------------
+// MARKETPLACE COMPONENTS (E-commerce & Product Management)
+// -----------------------------------------------------------------------------
+
+export {
+  ProductGrid,
+  ProductCard,
+  ProductGridSkeleton,
+  ProductGridEmpty,
+  productGridVariants,
+  productCardVariants,
+  type Product,
+  type ProductGridProps,
+  type ProductCardProps,
+} from './components/marketplace/product-grid'
+
+export {
+  ProductCard as StandaloneProductCard,
+  productCardVariants as standaloneProductCardVariants,
+  type ProductCardProps as StandaloneProductCardProps,
+} from './components/marketplace/product-card'
+
+export {
+  CategoryFilter,
+  CategoryGrid,
+  CategoryItem,
+  categoryFilterVariants,
+  type Category,
+  type CategoryFilterProps,
+} from './components/marketplace/category-filter'
+
+export {
+  PriceDisplay,
+  PriceRange,
+  DiscountBadge,
+  priceDisplayVariants,
+  priceVariants,
+  formatPrice,
+  calculateDiscount,
+  type PriceDisplayProps,
+  type PriceRangeProps,
+  type DiscountBadgeProps,
+} from './components/marketplace/price-display'
+
+export {
+  CartButton,
+  WishlistButton,
+  QuantitySelector,
+  cartButtonVariants,
+  type CartButtonProps,
+  type WishlistButtonProps,
+} from './components/marketplace/cart-button'
+
+// -----------------------------------------------------------------------------
 // CONVENIENCE RE-EXPORTS
 // -----------------------------------------------------------------------------
 
@@ -950,8 +1003,28 @@ export * as Admin from './components/admin'
 export * as Superapp from './components/superapp'
 export * as Layout from './components/layout'
 export * as Form from './components/form'
+export * as Marketplace from './components/marketplace'
+
+// All providers
+export * as Providers from './components/providers'
 
 // All utilities
 export * as Utils from './lib/utils'
 export * as Hooks from './hooks'
 export * as Types from './types'
+
+// =============================================================================
+// INDIVIDUAL PROVIDER EXPORTS
+// =============================================================================
+
+export {
+  CartProvider,
+  useCart,
+  CartBadge,
+  CartSummaryDisplay,
+  type CartItem,
+  type CartSummary,
+  type CartProviderProps,
+  type CartBadgeProps,
+  type CartSummaryProps,
+} from './components/providers/cart-provider'
